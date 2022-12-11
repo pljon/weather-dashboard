@@ -25,42 +25,34 @@
 
     <div class="content container">
         <div class="row">
-            
                 <!-- left column city search box and previous searches -->
-                <div class="col-md-3">
-                    <form>
-                        <label id="search-label" for="city-query">Search for a city:</label>
-                        <div class="form-row">
-    
-                        <input name="city">
-                        <button id="search-button" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                        
-                        </div>
-                    </form>
-    
-                    <section id="previous-searches" class="border-top border-primary pt-3">
-                        <h6>Previous searches:</h6>
-                        <!-- append list of buttons here -->
-                    </section>
-                </div>
+            <div class="col-md-3">
+                <form>
+                    <label id="search-label" for="city-query">Search for a city:</label>
+                    <div class="form-row">
 
-                <div class="col-md-8">
-                    <div class="row">
-                        <div id="current-weather" class="col-md-12">
-                            <!-- append current forecast details here -->
-                            
-                        </div>
+                    <input name="city">
+                    <button id="search-button" class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    
                     </div>
-    
-                    <div class="row">
-                        <div id="five-day" class="col-md-12">
-                            
-                            <!-- append five day forecast details here -->
-                        </div>
-                    </div>
+                </form>
+
+                <section id="previous-searches" class="border-top border-primary pt-3">
+                    <h6 id="previous">Previous searches:</h6>
+                    <!-- append list of buttons here -->
+                </section>
+            </div>
+
+            <div class="col-md-9">
+                <div id="current-weather" class="col-md-12">
+                    <!-- append current forecast details here -->
                 </div>
-        
-        </div>
+            
+                <div id="five-day" class="d-inline-flex flex-wrap pt-5">
+                    <!-- append five day forecast details here -->
+                </div>
+            </div>
+        </div>  
     </div>
 
 

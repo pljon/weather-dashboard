@@ -1,23 +1,17 @@
 // api key
 key = 'eadb20433e6df59a3eca6031b67b3de7'
 
-
-
-// get city information
-// var cityApi = `api.openweathermap.org/data/2.5/weather?q=London&appid=${key}`
-
-// 
-// var latlonApi = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
-
-// get weather information 
-// var getCurrentWeather = 
-
 var getFiveDayForecast = async (lat, lon) => {
     var base = 'https://api.openweathermap.org/data/2.5/forecast';
-    var query = `?lat=${lat}&lon=${lon}&appid=${key}`;
+    var query = `?lat=${lat}&lon=${lon}&units=imperial&appid=${key}`;
 
     var response = await fetch(base + query);
     var data = await response.json();
+
+    // test that data is being passed through
+    // updateCurrentWeather > runs getCurrentWeather (runs updateFiveDayForecast within function for lat, lon) > does rest of updateCurrentWeather
+    // updateFiveDayForecast > runs getFiveDayForecast within function > does rest of updateFiveDayForecast
+    // console.log(data);
 
     return data;
 };
@@ -32,7 +26,7 @@ var getCurrentWeather = async (city) => {
 
     var lat = data.coord.lat;
     var lon = data.coord.lon;
-    getFiveDayForecast(lat, lon);
+    updateFiveDayForecast(lat, lon);
 
     return data;
 };
