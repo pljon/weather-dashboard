@@ -12,7 +12,7 @@ var getFiveDayForecast = async (lat, lon) => {
     // updateCurrentWeather > runs getCurrentWeather (runs updateFiveDayForecast within function for lat, lon) > does rest of updateCurrentWeather
     // updateFiveDayForecast > runs getFiveDayForecast within function > does rest of updateFiveDayForecast
     // console.log(data);
-
+    
     return data;
 };
 
@@ -22,14 +22,18 @@ var getCurrentWeather = async (city) => {
     var query = `?q=${city}&units=imperial&appid=${key}`;
 
     var response = await fetch(base + query);
+
+    if (!response.ok) {
+        localStorage.removeItem(city);
+    }
+    
     var data = await response.json();
 
     var lat = data.coord.lat;
     var lon = data.coord.lon;
+    
     updateFiveDayForecast(lat, lon);
-
+    
     return data;
 };
-
-
 

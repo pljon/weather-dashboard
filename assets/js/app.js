@@ -1,5 +1,4 @@
-// variable for searched city input
-var cityForm = document.querySelector('form');
+
 
 var current = dayjs();
 var currentDate = current.format('YYYY/MM/DD');
@@ -38,7 +37,6 @@ var updateFiveDayForecast = async (lat, lon) => {
         sectionHeader.innerHTML = `5 day forecast for ${data.city.name}:`
         sectionHeader.className = "w-100 pb-2"
         fiveDay.appendChild(sectionHeader);
-        
 
         for (i = 0 ; i < data.list.length ; i+=8) {
 
@@ -94,29 +92,60 @@ var updateFiveDayForecast = async (lat, lon) => {
             ul.appendChild(tempLi);
             ul.appendChild(humidityLi);
             ul.appendChild(windSpeedLi);
-
+            
         }       
 
     })
 }
 
 var previousList = document.querySelector('#previous');
+var buttonList = document.querySelector('.button-list');
+// variable for searched city input
+var cityForm = document.querySelector('form');
 
 cityForm.addEventListener('submit', e => {
     e.preventDefault();
     
     // get city value
     var city = cityForm.city.value.trim();
-
+    
     // see if city value is what we need
     console.log(city);
 
     // reset the search city form
     cityForm.reset();
 
-    // update ui with current weather
+    // update with current weather
     updateCurrentWeather(city);
+    
+    // save to local storage 
+    localStorage.setItem(city, city);
+    var keys = Object.keys(localStorage);
+    // add a button of the last search input
+    addButton(city);
+    
+    
 });
+
+// adds a button after a searched city is saved to localstorage
+function addButton(city) {
+    var button = document.createElement('button');
+    button.innerText = localStorage.getItem(city);
+    button.className = 'block m-2 p-2 cityBtn';
+    buttonList.appendChild(button);
+    // listens for a button click, sends function to pull info back
+    button.addEventListener('click', () => {
+        updateCurrentWeather(city);
+    })    
+};
+
+var renderCities = () => {
+    for (var i = 0; i < localStorage.length; i++) {
+        addButton(localStorage.key(i));       
+    }
+}
+
+renderCities();
 
 function clearAll() {
     $('#current-weather').empty();
